@@ -1,5 +1,28 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Add Movie
+h1 Film Ekle
+form(action='/api/movie' method='POST')
+  label(for='title') Film İsmi
+  br
+  input#title(type='text' name='title')
+  br
+  label(for='imdbScore') Imdb Puanı;
+  br
+  input#imdbScore(type='number' name='imdbScore')
+  br
+  label(for='category') Film Kategorisi
+  br
+  input#category(type='text' name='category')
+  br
+  label(for='country') Ülke
+  br
+  input#country(type='text' name='country')
+  br
+  label(for='year') Yıl
+  br
+  input#year(type='number' name='year')
+  br
+  input#submit(type='submit')

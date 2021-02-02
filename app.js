@@ -23,12 +23,12 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/movie', movie);
+app.use('/api/movies', movie);
 
 
 // catch 404 and forward to error handler
