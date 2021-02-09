@@ -29,7 +29,8 @@ router.post('/', (req, res, next) => {
     imdbScore: data.imdbScore,
     category: data.category,
     country: data.country,
-    year: data.year
+    year: data.year,
+    directorID: data.directorID
   });
 
   /*movie.save((err, data) => {

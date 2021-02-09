@@ -7,10 +7,14 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const movie = require('./routes/movie');
+const director = require('./routes/director');
 const database = require('./helper/db.js')();
+const config = require('./config');
 
 const app = express();
+app.set('api_secret_key', config.api_secret_key);
 
+const verifyToken = require('./middleware/verifyToken');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -18,17 +22,19 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+  extended: true
 }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api/', verifyToken)
 app.use('/api/movies', movie);
+app.use('/api/directors', director);
 
 
 // catch 404 and forward to error handler
